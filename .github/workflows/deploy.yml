@@ -23,7 +23,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          # Match the toolchain the lockfile was generated with: npm 11 prunes
+          # optional platform subtrees that npm 10 then expects to find, so a
+          # mismatched major breaks `npm ci` on entries nothing here installs.
+          node-version: 24
           cache: npm
       - run: npm ci
       - run: npm run lint
