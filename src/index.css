@@ -1,0 +1,411 @@
+@import "@fontsource-variable/inter";
+
+/* Simple and clean: neutral greys, one blue accent, green for gains, red for problems. */
+:root {
+  --bg: #ffffff;
+  --surface: #f8f8f9;
+  --text: #18181b;
+  --muted: #6b6b76;
+  --border: #e5e5ea;
+  --accent: #2563eb;
+  --accent-soft: #eff4ff;
+  --good: #15803d;
+  --bad: #dc2626;
+  --warn: #b45309;
+
+  --btn-ink: #ffffff;
+  --topbar-bg: rgba(255, 255, 255, 0.9);
+  --tag-good-bg: #f0fdf4;
+  --tag-bad-bg: #fef2f2;
+  --tag-warn-bg: #fffbeb;
+  --notice-bg: #fffbeb;
+  --notice-border: #fde68a;
+  --notice-ink: #78350f;
+  --shadow: rgba(0, 0, 0, 0.18);
+
+  /* Chart tokens. The sequential ramp is numbered from "nearest the surface"
+     to "most prominent", so each theme runs it in its own direction: light
+     recedes toward white, dark recedes toward black. Label ink per step is
+     whichever of the two inks measures higher contrast on that step. */
+  --seq-1: #cde2fb;
+  --seq-2: #9ec5f4;
+  --seq-3: #6da7ec;
+  --seq-4: #3987e5;
+  --seq-5: #256abf;
+  --seq-6: #184f95;
+  --seq-7: #0d366b;
+  --seq-ink-1: #18181b;
+  --seq-ink-2: #18181b;
+  --seq-ink-3: #18181b;
+  --seq-ink-4: #18181b;
+  --seq-ink-5: #ffffff;
+  --seq-ink-6: #ffffff;
+  --seq-ink-7: #ffffff;
+  --seq-line: #256abf;
+  --odds-bye: #1e40af;
+  --odds-in: #3b82f6;
+  --odds-track: #ececef;
+  --cut: #52514e;
+
+  color-scheme: light;
+  font-family: "Inter Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Dark mode is selected, not an automatic flip: its own steps, measured
+   against the dark surface. The media query covers the OS setting; the
+   data-theme scope covers the in-app toggle, which must win both ways. */
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --bg: #101319;
+    --surface: #191d25;
+    --text: #e8eaed;
+    --muted: #9aa0a8;
+    --border: #2a2f3a;
+    --accent: #60a5fa;
+    --accent-soft: #17233a;
+    --good: #4ade80;
+    --bad: #f87171;
+    --warn: #fbbf24;
+
+    --btn-ink: #0b1220;
+    --topbar-bg: rgba(16, 19, 25, 0.9);
+    --tag-good-bg: #10281a;
+    --tag-bad-bg: #2c1618;
+    --tag-warn-bg: #2a2010;
+    --notice-bg: #2a2010;
+    --notice-border: #4a3a12;
+    --notice-ink: #fbbf24;
+  --shadow: rgba(0, 0, 0, 0.5);
+
+    --seq-1: #0d366b;
+    --seq-2: #184f95;
+    --seq-3: #256abf;
+    --seq-4: #3987e5;
+    --seq-5: #6da7ec;
+    --seq-6: #9ec5f4;
+    --seq-7: #cde2fb;
+    --seq-ink-1: #e8eaed;
+    --seq-ink-2: #e8eaed;
+    --seq-ink-3: #e8eaed;
+    --seq-ink-4: #0b1220;
+    --seq-ink-5: #0b1220;
+    --seq-ink-6: #0b1220;
+    --seq-ink-7: #0b1220;
+    --seq-line: #6da7ec;
+    --odds-bye: #93c5fd;
+    --odds-in: #3b82f6;
+    --odds-track: #262b35;
+    --cut: #9aa0a8;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #101319;
+  --surface: #191d25;
+  --text: #e8eaed;
+  --muted: #9aa0a8;
+  --border: #2a2f3a;
+  --accent: #60a5fa;
+  --accent-soft: #17233a;
+  --good: #4ade80;
+  --bad: #f87171;
+  --warn: #fbbf24;
+
+  --btn-ink: #0b1220;
+  --topbar-bg: rgba(16, 19, 25, 0.9);
+  --tag-good-bg: #10281a;
+  --tag-bad-bg: #2c1618;
+  --tag-warn-bg: #2a2010;
+  --notice-bg: #2a2010;
+  --notice-border: #4a3a12;
+  --notice-ink: #fbbf24;
+  --shadow: rgba(0, 0, 0, 0.5);
+
+  --seq-1: #0d366b;
+  --seq-2: #184f95;
+  --seq-3: #256abf;
+  --seq-4: #3987e5;
+  --seq-5: #6da7ec;
+  --seq-6: #9ec5f4;
+  --seq-7: #cde2fb;
+  --seq-ink-1: #e8eaed;
+  --seq-ink-2: #e8eaed;
+  --seq-ink-3: #e8eaed;
+  --seq-ink-4: #0b1220;
+  --seq-ink-5: #0b1220;
+  --seq-ink-6: #0b1220;
+  --seq-ink-7: #0b1220;
+  --seq-line: #6da7ec;
+  --odds-bye: #93c5fd;
+  --odds-in: #3b82f6;
+  --odds-track: #262b35;
+  --cut: #9aa0a8;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; }
+h1, h2 { margin: 0; letter-spacing: -0.01em; }
+h2 { font-size: 15px; font-weight: 600; }
+
+button, input, select {
+  font: inherit; color: var(--text); background: var(--bg);
+  border: 1px solid var(--border); border-radius: 8px; padding: 7px 12px;
+}
+button { cursor: pointer; background: var(--accent); border-color: var(--accent); color: var(--btn-ink); font-weight: 500; }
+button:hover:not(:disabled) { filter: brightness(0.94); }
+button:disabled { opacity: 0.5; cursor: default; }
+button.ghost { background: var(--bg); color: var(--text); border-color: var(--border); }
+button.ghost:hover:not(:disabled) { background: var(--surface); filter: none; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; max-width: 75ch; }
+.error { color: var(--bad); }
+.good-text { color: var(--good); font-weight: 600; }
+.notice { background: var(--notice-bg); border: 1px solid var(--notice-border); color: var(--notice-ink); border-radius: 10px; padding: 10px 14px; margin: 0; }
+.loading { padding: 48px 0; }
+
+/* ---------- top bar ---------- */
+.topbar { border-bottom: 1px solid var(--border); background: var(--topbar-bg); backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 5; }
+.topbar-inner { max-width: 1120px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; gap: 24px; }
+.brand { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+.brand strong { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.brand .muted { font-size: 12px; }
+nav { display: flex; gap: 2px; margin-right: auto; }
+.tab { text-decoration: none; color: var(--muted); padding: 6px 12px; border-radius: 8px; font-weight: 500; }
+.tab:hover { color: var(--text); background: var(--surface); }
+.tab.active { color: var(--accent); background: var(--accent-soft); }
+
+/* Theme-dependent wording: the sequential ramp reverses per theme, so the
+   legend has to as well. display:none keeps the hidden half out of the
+   accessibility tree, so only one phrasing is ever read out. */
+.if-dark { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) .if-light { display: none; }
+  :root:where(:not([data-theme="light"])) .if-dark { display: inline; }
+}
+:root[data-theme="dark"] .if-light { display: none; }
+:root[data-theme="dark"] .if-dark { display: inline; }
+
+.icon-btn { display: inline-flex; align-items: center; justify-content: center; padding: 7px; line-height: 0; color: var(--muted); }
+.icon-btn:hover:not(:disabled) { color: var(--text); }
+
+main { max-width: 1120px; margin: 0 auto; padding: 28px 24px 64px; }
+.grid { display: grid; gap: 20px; }
+
+@media (max-width: 760px) {
+  .topbar-inner { height: auto; padding: 10px 16px; flex-wrap: wrap; gap: 10px; }
+  nav { order: 3; width: 100%; overflow-x: auto; margin: 0; }
+  .topbar .row { margin-left: auto; }
+  main { padding: 20px 16px 48px; }
+}
+
+/* ---------- cards ---------- */
+.card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; overflow-x: auto; }
+.card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+.card-head .muted { font-size: 13px; }
+.card > p.muted { max-width: 80ch; margin-top: 0; }
+
+/* lineup summary */
+.callout { padding: 4px 0; }
+.callout h1 { font-size: 26px; font-weight: 650; }
+.callout p { margin: 6px 0 0; color: var(--muted); max-width: 70ch; }
+.callout-bad h1 { color: var(--text); }
+.callout-good h1 { color: var(--good); }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.stat { background: var(--surface); border-radius: 10px; padding: 12px 14px; }
+.stat-value { font-size: 22px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.stat-label { color: var(--muted); font-size: 12px; }
+.stat.good .stat-value { color: var(--good); }
+.stat.bad .stat-value { color: var(--bad); }
+
+/* ---------- tables ---------- */
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; font-weight: 500; font-size: 12px; color: var(--muted); padding: 8px 10px; border-bottom: 1px solid var(--border); }
+td { padding: 8px 10px; vertical-align: middle; border-bottom: 1px solid var(--border); }
+tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--surface); }
+.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.num { font-weight: 500; }
+tr.me td { background: var(--accent-soft); }
+tr.dim { color: var(--muted); }
+tr.dim .player-name { font-weight: 500; }
+td.highlight { background: var(--accent-soft); }
+.rank-h { width: 40px; }
+td.rank { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* ---------- bench list ---------- */
+.menu { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0 32px; }
+.menu li { padding: 10px 0; border-bottom: 1px solid var(--border); }
+.menu-line { display: flex; align-items: baseline; gap: 8px; }
+.menu-item { font-weight: 600; }
+.leader { flex: 1; }
+.menu-price { font-weight: 600; font-variant-numeric: tabular-nums; }
+.menu-desc { color: var(--muted); font-size: 13px; }
+
+/* ---------- players ---------- */
+.player { display: inline-flex; align-items: center; gap: 10px; min-width: 0; }
+.headshot { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; background: var(--surface); border: 1px solid var(--border); flex: none; }
+.headshot.placeholder { display: inline-block; }
+.player-text { display: flex; flex-direction: column; line-height: 1.3; }
+.player-name { font-weight: 600; white-space: nowrap; }
+.player-sub { color: var(--muted); font-size: 12px; display: flex; gap: 6px; align-items: center; }
+.avatar { border-radius: 50%; background: var(--surface); border: 1px solid var(--border); display: inline-block; flex: none; }
+.team { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
+
+.pos { font-size: 11px; font-weight: 600; padding: 0 6px; border-radius: 4px; background: var(--surface); color: var(--muted); border: 1px solid var(--border); }
+.slot { display: inline-block; min-width: 44px; text-align: center; font-size: 12px; font-weight: 600; padding: 3px 6px; border-radius: 6px; background: var(--surface); color: var(--muted); }
+
+.tag { display: inline-block; font-size: 12px; font-weight: 500; padding: 1px 8px; border-radius: 999px; margin-right: 4px; white-space: nowrap; }
+.tag-bad { background: var(--tag-bad-bg); color: var(--bad); }
+.tag-warn { background: var(--tag-warn-bg); color: var(--warn); }
+.tag-good { background: var(--tag-good-bg); color: var(--good); }
+.tag-neutral { background: var(--surface); color: var(--muted); }
+
+/* ---------- lineup moves ---------- */
+.swaps { list-style: none; margin: 0; padding: 0; }
+.swaps li { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.swaps li:last-child { border-bottom: none; }
+.swap-in { font-weight: 600; color: var(--good); min-width: 36px; }
+.swap-arrow { color: var(--muted); }
+.gain { margin-left: auto; font-weight: 600; color: var(--good); font-variant-numeric: tabular-nums; }
+
+/* ---------- league page ---------- */
+.matchups { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.matchups li { border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; display: grid; gap: 6px; }
+.matchups li.me { border-color: var(--accent); background: var(--accent-soft); }
+.mu-side { display: flex; justify-content: space-between; align-items: center; color: var(--muted); gap: 8px; }
+.mu-side strong { font-weight: 600; font-variant-numeric: tabular-nums; }
+.mu-side.win { color: var(--text); }
+.tx { list-style: none; margin: 0; padding: 0; }
+.tx li { padding: 10px 0; border-bottom: 1px solid var(--border); }
+.tx li:last-child { border-bottom: none; }
+.tx-detail { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 2px; font-size: 13px; }
+.add { color: var(--good); } .drop { color: var(--bad); }
+
+/* ---------- setup ---------- */
+.setup { max-width: 520px; margin: 14vh auto; padding: 0 16px; }
+.setup input { flex: 1; min-width: 200px; }
+.league-list { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 8px; }
+.league-btn { width: 100%; display: flex; align-items: center; gap: 12px; text-align: left; background: var(--bg); color: var(--text); font-weight: 400; border: 1px solid var(--border); border-radius: 10px; }
+.league-btn:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-soft); filter: none; }
+.league-meta { display: grid; }
+.league-meta strong { font-weight: 600; }
+
+/* ---------- trade ---------- */
+.trade-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 960px) { .trade-cols { grid-template-columns: 1fr; } }
+.picker { list-style: none; margin: 0; padding: 0; }
+.picker li { display: grid; grid-template-columns: auto 1fr auto 52px; align-items: center; gap: 10px; padding: 6px 8px; cursor: pointer; border-radius: 8px; }
+.picker li:hover { background: var(--surface); }
+.picker li.sel { background: var(--accent-soft); }
+.picker input { accent-color: var(--accent); }
+.picker .num { font-weight: 500; }
+.verdict { font-size: 18px; font-weight: 600; margin: 0 0 14px; }
+.card-head select { font-weight: 600; }
+
+/* ---------- charts ---------- */
+.chart-legend { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; color: var(--muted); font-size: 12px; margin-bottom: 12px; }
+.chart-legend i.key { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.chart-legend .key-track { background: var(--odds-track); box-shadow: inset 0 0 0 1px var(--border); }
+
+/* fixed so the cards' horizontal scroll can't clip it */
+.chart-tip {
+  position: fixed; z-index: 20; pointer-events: none;
+  transform: translate(-50%, calc(-100% - 12px));
+  background: var(--text); color: var(--bg);
+  padding: 6px 9px; border-radius: 8px; font-size: 12px; line-height: 1.4;
+  white-space: nowrap; box-shadow: 0 2px 10px var(--shadow);
+}
+
+/* 100% stacked odds bar: 2px surface gap between segments, square at the
+   baseline, 4px rounded at the data end. */
+.odds-h { min-width: 160px; width: 28%; }
+.oddsbar { display: flex; gap: 2px; height: 10px; background: var(--odds-track); border-radius: 3px; overflow: hidden; min-width: 120px; }
+.oddsbar .seg { height: 100%; }
+.oddsbar .seg:last-child { border-radius: 0 4px 4px 0; }
+.seg-bye { background: var(--odds-bye); }
+.seg-in { background: var(--odds-in); }
+
+/* seed heatmap */
+.heatmap-wrap { overflow-x: auto; }
+.heatmap { border-collapse: separate; border-spacing: 2px; }
+.heatmap th { padding: 4px 6px; border: none; white-space: nowrap; }
+.heatmap tbody th { text-align: left; font-weight: 500; color: var(--text); font-size: 13px; }
+.heatmap td.cell {
+  border: none; padding: 0; width: 34px; height: 28px; text-align: center;
+  font-variant-numeric: tabular-nums; font-size: 12px; font-weight: 600;
+  background: var(--surface); border-radius: 4px; cursor: default;
+}
+.heatmap tbody tr:hover td { background-color: inherit; }
+.heatmap td.cell.s1 { background: var(--seq-1); color: var(--seq-ink-1); }
+.heatmap td.cell.s2 { background: var(--seq-2); color: var(--seq-ink-2); }
+.heatmap td.cell.s3 { background: var(--seq-3); color: var(--seq-ink-3); }
+.heatmap td.cell.s4 { background: var(--seq-4); color: var(--seq-ink-4); }
+.heatmap td.cell.s5 { background: var(--seq-5); color: var(--seq-ink-5); }
+.heatmap td.cell.s6 { background: var(--seq-6); color: var(--seq-ink-6); }
+.heatmap td.cell.s7 { background: var(--seq-7); color: var(--seq-ink-7); }
+.heatmap tr.me tbody th, .heatmap tr.me th[scope="row"] { color: var(--accent); }
+.heatmap .cut-bye { box-shadow: 3px 0 0 -1px var(--cut); }
+.heatmap .cut-in { box-shadow: 3px 0 0 -1px var(--cut); }
+
+/* odds history, small multiples */
+.sparks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px 24px; }
+.sparks li { padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; }
+.sparks li.me { border-color: var(--accent); background: var(--accent-soft); }
+.spark-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.spark-head .team { font-size: 13px; min-width: 0; }
+.spark-head strong { font-variant-numeric: tabular-nums; }
+.spark { line-height: 0; }
+
+/* league-set division names can be long; keep them from blowing out the column */
+.div-cell { max-width: 190px; }
+.div-name { display: inline-block; max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: bottom; }
+.div-lead { margin-left: 6px; font-size: 11px; }
+
+/* "what has to happen" */
+h3.sub { font-size: 13px; font-weight: 600; margin: 18px 0 2px; }
+.card > h3.sub:first-child { margin-top: 0; }
+.leverage { list-style: none; margin: 4px 0 0; padding: 0; }
+.leverage li { display: grid; grid-template-columns: 48px minmax(140px, 1fr) minmax(60px, 160px) 64px; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--border); }
+.leverage li:last-child { border-bottom: none; }
+.lev-week { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.lev-teams { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lev-bar { height: 8px; background: var(--odds-track); border-radius: 3px; overflow: hidden; }
+.lev-fill { display: block; height: 100%; background: var(--odds-in); border-radius: 0 4px 4px 0; }
+.lev-num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 500; color: var(--muted); font-size: 13px; }
+@media (max-width: 620px) {
+  .leverage li { grid-template-columns: 40px 1fr 56px; }
+  .lev-bar { display: none; }
+}
+
+.ladder { list-style: none; margin: 6px 0 10px; padding: 0; display: grid; gap: 14px; }
+.ladder > li { border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+.rung-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+.rung-head .muted { font-size: 12px; font-variant-numeric: tabular-nums; }
+.rung-none { margin: 2px 0 0; }
+
+.recipes { list-style: none; margin: 4px 0 10px; padding: 0; }
+.recipes li { padding: 8px 0 8px 14px; border-left: 2px solid var(--border); margin-bottom: 6px; line-height: 1.5; }
+.recipes li:last-child { margin-bottom: 0; }
+.recipe-own { font-weight: 600; }
+.recipe-free { color: var(--good); font-weight: 500; }
+.recipe-route { margin-left: 8px; font-size: 11px; }
+
+/* live standings badge */
+.live-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--good); white-space: nowrap; }
+.live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--good); flex: none; animation: live-pulse 1.5s ease-in-out infinite; }
+@keyframes live-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.75); } }
+@media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }
+
+/* card accents */
+.card.zone-green { border-left: 3px solid var(--good); }
+.card.zone-red { border-left: 3px solid var(--bad); }
